@@ -16,9 +16,9 @@ Deploying reto-swapi to stage dev (us-east-1)
 ✔ Service deployed to stack reto-swapi-dev (185s)
 
 endpoints:
-  POST - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/person/{id}
-  POST - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/species/{id}
-  GET - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/resources/{table}
+  POST - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/person/{id}
+  POST - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/species/{id}
+  GET - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/resources/{table}
 functions:
   createPerson: reto-swapi-dev-createPerson (18 MB)
   createSpecies: reto-swapi-dev-createSpecies (18 MB)
@@ -36,9 +36,9 @@ Para las pruebas puedes utilizar Postman, ARC, Swagger, Insomnia o la plataforma
 
 ```bash
 endpoints:
-  POST - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/person/{id}
-  POST - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/species/{id}
-  GET - https://iyf55xkvo5.execute-api.us-east-1.amazonaws.com/resources/{table}
+  POST - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/person/{id}
+  POST - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/species/{id}
+  GET - https://lx3lct0qtf.execute-api.us-east-1.amazonaws.com/resources/{table}
 functions:
   createPerson: reto-swapi-dev-createPerson (18 MB)
   createSpecies: reto-swapi-dev-createSpecies (18 MB)
