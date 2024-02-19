@@ -1,0 +1,79 @@
+service: reto-swapi
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  profile: serverless
+  region: us-east-1
+  environment:
+    LAMBDA_PEOPLE_TABLE: ${self:custom.peopleTable}
+    LAMBDA_SPECIES_TABLE: ${self:custom.speciesTable}
+    LAMBDA_NAMESPACE_ID: 1b671a64-40d5-491e-99b0-da01ff1f3341
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.peopleTable}
+
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:custom.speciesTable}
+
+package:
+  individually: true
+
+custom:
+  peopleTable: ${sls:stage}-swapi-people-table
+  speciesTable: ${sls:stage}-swapi-species-table
+
+functions:
+  createPerson:
+    handler: src/index.createPerson
+    events:
+      - httpApi:
+          method: POST
+          path: /person/{id}
+  createSpecies:
+    handler: src/index.createSpecies
+    events:
+      - httpApi:
+          method: POST
+          path: /species/{id}
+  getResources:
+    handler: src/index.getResources
+    events:
+      - httpApi:
+          method: GET
+          path: /resources/{table}
+
+plugins:
+  - serverless-offline
+
+resources:
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.peopleTable}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+    TaskTable2:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.speciesTable}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
